@@ -22,6 +22,6 @@
 </head>
 <body class="metro">
 <mytags:nav isLogged="<%=isLogged%>"/>
-
+<mytags:loginForm isLogged="<%=isLogged%>"/>
 </body>
 </html>

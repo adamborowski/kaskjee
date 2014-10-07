@@ -11,9 +11,9 @@
 <%@taglib uri="/WEB-INF/tlds/mytags.tld" prefix="mytags" %>
 <%
     HttpSession session = request.getSession(false);
-    Boolean isLogged = false;
+    String isLogged = "1";
     if (session != null) {
-        isLogged = true;
+        isLogged = "0";
     }
 %>
 <html>
@@ -21,9 +21,7 @@
     <mytags:common/>
 </head>
 <body class="metro">
-<mytags:header/>
-<%= isLogged ? "logged" : "not logged" %>
-<c:url var="self_url" value="/index.jsp"/>
-<a href="${self_url}">/index.jsp</a>
+<mytags:nav isLogged="<%=isLogged%>"/>
+
 </body>
 </html>
