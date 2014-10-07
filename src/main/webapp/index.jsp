@@ -6,17 +6,24 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page session="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="/WEB-INF/tlds/mytags.tld" prefix="mytags" %>
+<%
+    HttpSession session = request.getSession(false);
+    Boolean isLogged = false;
+    if (session != null) {
+        isLogged = true;
+    }
+%>
 <html>
 <head>
-    <title>DUPA</title>
-    <link rel="stylesheet" href="resources/metro-bootstrap.min.css">
-    <link rel="stylesheet" href="resources/jquery-ui.min.css">
-    <link rel="stylesheet" href="resources/iconFont.min.css">
-    <script src="resources/jquery-2.1.1.min.js"></script>
-    <script src="resources/jquery-ui.min.js"></script>
-    <script src="resources/metro.min.js"></script>
+    <mytags:common/>
 </head>
 <body class="metro">
-
+<mytags:header/>
+<%= isLogged ? "logged" : "not logged" %>
+<c:url var="self_url" value="/index.jsp"/>
+<a href="${self_url}">/index.jsp</a>
 </body>
 </html>

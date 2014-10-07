@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.1"
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+    <tlib-version>1.0</tlib-version>
+    <short-name>mytags</short-name>
+    <uri>/tlds/mytags</uri>
+    <!--<tag>-->
+    <!--<name>header</name>-->
+    <!--<tag-class>pl.gda.pg.eti.kask.javaee.jsp.view.tags.Header</tag-class>-->
+    <!--&lt;!&ndash;<body-content>empty</body-content>&ndash;&gt;-->
+    <!--<body-content>scriptless</body-content>-->
+    <!--<attribute>-->
+    <!--<name>text</name>-->
+    <!--<required>true</required>-->
+    <!--<rtexprvalue>true</rtexprvalue>-->
+    <!--<type>java.lang.String</type>-->
+    <!--</attribute>-->
+    <!--</tag>-->
+    <tag-file>
+        <name>header</name>
+        <path>/WEB-INF/tags/header.tag</path>
+    </tag-file>
+    <tag-file>
+        <name>common</name>
+        <path>/WEB-INF/tags/common.tag</path>
+    </tag-file>
+    <!--<function>-->
+    <!--<name>formatDate</name>-->
+    <!--<function-class>pl.gda.pg.eti.kask.javaee.jsp.view.tags.DateFormater</function-class>-->
+    <!--<function-signature>String format(java.util.Date)</function-signature>-->
+    <!--</function>-->
+</taglib>
