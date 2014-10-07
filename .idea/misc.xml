@@ -5,6 +5,7 @@
   </component>
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$" />
+    <type id="sass-stdlib" />
   </component>
   <component name="IdProvider" IDEtalkID="0B08DD7B8B7A74601267096E9B7B0192" />
   <component name="MavenProjectsManager">

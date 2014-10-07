@@ -1,9 +1,13 @@
 <%@ tag import="java.util.ResourceBundle" %>
+<%@ tag import="java.util.ArrayList" %>
+<%@ tag import="pl.adamborowski.kaskjee.bean.Flashes" %>
 <%@ tag description="header tag always visible on age" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ attribute name="isLogged" required="true" rtexprvalue="true" %>
+<%@ taglib uri="/WEB-INF/tlds/mytags.tld" prefix="mytags" %>
 <%-- The list of normal or fragment attributes can be specified here: --%>
 <% ResourceBundle r = ResourceBundle.getBundle("kaskjee"); %>
+<jsp:useBean id="user" class="pl.adamborowski.kaskjee.bean.AuthUser" scope="session"/>
+<jsp:useBean id="flashes" class="pl.adamborowski.kaskjee.bean.Flashes" scope="session"/>
 <jsp:doBody/>
 <%--<c:if test="${not empty msg}">--%>
 <%--<div style="font-weight: bold">--%>
@@ -17,8 +21,13 @@
                 <%=r.getString("title")%>
             </a>
             <ul class="dropdown-menu" data-role="dropdown">
-                <li><a href="#">Main</a></li>
-                <li><a href="#">File Open</a></li>
+                <li><a href="index.jsp">Main</a></li>
+                <li>
+                    <a href="#" class="dropdown-toggle">Active users</a>
+                    <ul class="dropdown-menu place-right" data-role="dropdown">
+                        <mytags:users sort="ASC" color="red"/>
+                    </ul>
+                </li>
                 <li class="divider"></li>
                 <li><a href="#">Print...</a></li>
                 <li class="divider"></li>
@@ -58,10 +67,10 @@
         <%--Sergey Pimenov--%>
         <%--<img src="images/211858_100001930891748_287895609_q.jpg"/>--%>
         <c:choose>
-            <c:when test="${isLogged == \"1\"}">
+            <c:when test="${user.logged}">
                 <a href="login.jsp">
                     <button class="element place-right icon-user">
-                        <%= r.getString("logged_as") + request.getSession().getAttribute("username") %>
+                        logged as: ${user.username}
                     </button>
                 </a>
             </c:when>
@@ -76,9 +85,8 @@
 
     </nav>
 </nav>
-<% String msg = request.getParameter("message"); %>
-<% if (msg != null && !msg.isEmpty()) { %>
-<div class="margin10 fg-white notice marker-on-top bg-<%=r.getString(msg+".color")%>">
-    <%= msg.startsWith("message.") ? r.getString(msg) : msg %>
+<% for (String flash : ((Flashes) session.getAttribute("flashes")).getMessages()) { %>
+<div class="margin10 fg-white notice marker-on-top bg-<%=r.getString(flash+ ".color")%>">
+    <%= flash.startsWith("message.") ? r.getString(flash) : flash %>
 </div>
 <% } %>

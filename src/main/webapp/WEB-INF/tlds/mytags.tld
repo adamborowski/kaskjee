@@ -30,6 +30,33 @@
         <name>loginForm</name>
         <path>/WEB-INF/tags/loginForm.tag</path>
     </tag-file>
+    <tag-file>
+        <name>users</name>
+        <path>/WEB-INF/tags/users.tag</path>
+    </tag-file>
+    <tag>
+        <name>para</name>
+        <tag-class>pl.adamborowski.kaskjee.Paragraph</tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <name>caption</name>
+            <required>true</required>
+            <type>java.lang.String</type>
+            <fragment>false</fragment>
+        </attribute>
+        <attribute>
+            <name>aligment</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+            <fragment>false</fragment>
+        </attribute>
+        <attribute>
+            <name>color</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+            <fragment>false</fragment>
+        </attribute>
+    </tag>
     <!--<function>-->
     <!--<name>formatDate</name>-->
     <!--<function-class>pl.gda.pg.eti.kask.javaee.jsp.view.tags.DateFormater</function-class>-->

@@ -1,13 +1,12 @@
 <%@ tag import="java.util.ResourceBundle" %>
 <%@ tag description="login form" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ attribute name="isLogged" required="true" rtexprvalue="true" %>
 <% ResourceBundle r = ResourceBundle.getBundle("kaskjee"); %>
-
+<jsp:useBean id="user" class="pl.adamborowski.kaskjee.bean.AuthUser" scope="session"/>
 <c:url var="login" value="/UserServlet"/>
 <div class="a-login-form">
     <c:choose>
-        <c:when test="${isLogged eq \"1\"}">
+        <c:when test="${user.logged}">
             <%-- logout link --%>
             <h3><%=r.getString("message.logout")%>
             </h3>

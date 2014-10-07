@@ -1,6 +1,11 @@
 package pl.adamborowski.kaskjee;
 
+import pl.adamborowski.kaskjee.bean.AuthUser;
+import pl.adamborowski.kaskjee.bean.Flashes;
+import pl.adamborowski.kaskjee.bean.UserList;
+
 import java.io.IOException;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,23 +32,25 @@ public class UserServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        System.out.println("UserServlet: in processRequest");
 
-        HttpSession session = request.getSession(false);
-        if (null != session) {
-            // sesja istnieje, więc wylogowanie usera
-            session.invalidate();
-            response.sendRedirect("index.jsp?message=message.logout_success");
+        HttpSession session = request.getSession();
+        AuthUser user = (AuthUser) session.getAttribute(AuthUser.BEAN_NAME);
+        Flashes flashes = (Flashes) session.getAttribute("flashes");
+        if (user.isLogged()) {
+            user.setLogged(false);
+            user.setUsername(null);
+            //unregister
+            UserList users = (UserList) getServletContext().getAttribute(UserList.BEAN_NAME);
+            users.removeUser(user);
+            flashes.addFlash("message.logout_success");
+            response.sendRedirect("index.jsp");
             return;
         }
 
         if (request.getMethod().equals("POST")) {
-            // sesja nie istnieje, więc próba zalogowania
             boolean valid = false;
-
             String[] loginText = request.getParameterMap().get(LOGIN_FIELD);
             String[] passwordText = request.getParameterMap().get(PASSWORD_FIELD);
-
             String username = null;
             if (loginText != null && loginText.length > 0) {
                 username = loginText[0];
@@ -57,25 +64,25 @@ public class UserServlet extends HttpServlet {
             ResourceBundle r = ResourceBundle.getBundle("kaskjee");
 
             if (username != null && password != null) {
-                // sprawdzenie loginu i hasła
                 if (password.equals(r.getString("fake_password"))) {
                     valid = true;
                 }
             }
-
             if (valid) {
-                // utworzenie sesji
-                session = request.getSession(true);
-                session.setAttribute("username", username);
-
-                // zarejestrowanie usera
-                //@todo: pobranie Beana trzymającego listę userów i dodanie loginu
-
-                // przekierowanie na listę userów
-                response.sendRedirect("index.jsp?message=message.login_success");
+                user.setUsername(username);
+                user.setLogged(true);
+                user.setLastLogin(new Date());
+//                session.setAttribute(AuthUser.BEAN_NAME, user);
+                //dodanie do listy użytkonwików
+                UserList users = (UserList) getServletContext().getAttribute(UserList.BEAN_NAME);
+                users.addUser(user);
+                //przekierowanie na stronę główną
+                flashes.addFlash("message.login_success");
+                response.sendRedirect("index.jsp");
             } else {
                 // przekierowanie z wiadomością
-                response.sendRedirect("login.jsp?message=message.login_fail");
+                flashes.addFlash("message.login_fail");
+                response.sendRedirect("login.jsp");
             }
         } else {
             response.setStatus(500);
