@@ -29,9 +29,28 @@
                     </ul>
                 </li>
                 <li class="divider"></li>
-                <li><a href="#">Print...</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Exit</a></li>
+                <li>
+                    <a href="#" class="dropdown-toggle">Currencies</a>
+                    <ul class="dropdown-menu place-right" data-role="dropdown" style="width:300px">
+                        <mytags:currency value="10" from="PLN" to="EUR"/>
+                        <mytags:currency value="25" from="GBP" to="EUR"/>
+                        <mytags:currency value="1" from="USD" to="EUR"/>
+                        <mytags:currency value="1" from="EUR" to="PLN"/>
+                        <mytags:currency value="1" from="USD" to="PLN"/>
+                        <mytags:currency value="1" from="GBP" to="PLN"/>
+                    </ul>
+
+                </li>
+
+                <c:if test="${user.logged}">
+                    <li class="divider"></li>
+                    <li>
+                        <c:url var="login" value="/UserServlet"/>
+                        <a href="${login}">
+                            <%=r.getString("logout")%>
+                        </a>
+                    </li>
+                </c:if>
             </ul>
         </div>
 

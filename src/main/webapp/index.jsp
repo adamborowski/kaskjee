@@ -18,6 +18,7 @@
 <c:if test="${!user.logged}">
     <mytags:loginForm/>
 </c:if>
-<mytags:para caption="Hottest News">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie faucibus urna. Aliquam nec tristique ipsum, feugiat molestie turpis. Nunc lobortis, justo vitae pulvinar egestas, enim ex gravida mi, sed eleifend augue nibh eget mi. Suspendisse potenti. Donec consectetur commodo eros et dapibus. Suspendisse nec vestibulum augue. Vestibulum porttitor ligula cursus lacinia congue. Nam mauris ligula, pellentesque nec neque vel, suscipit tristique nisl.</mytags:para>
+<mytags:para
+        caption="Hottest News">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie faucibus urna. Aliquam nec tristique ipsum, feugiat molestie turpis. Nunc lobortis, justo vitae pulvinar egestas, enim ex gravida mi, sed eleifend augue nibh eget mi. Suspendisse potenti. Donec consectetur commodo eros et dapibus. Suspendisse nec vestibulum augue. Vestibulum porttitor ligula cursus lacinia congue. Nam mauris ligula, pellentesque nec neque vel, suscipit tristique nisl.</mytags:para>
 </body>
 </html>
